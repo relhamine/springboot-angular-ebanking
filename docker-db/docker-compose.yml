@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: database
+    environment:
+        POSTGRES_DB: skolae_db
+        POSTGRES_USER: root
+        POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    networks:
+      - pg-network
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pg-admin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@skolae.com
+      PGADMIN_DEFAULT_PASSWORD: password
+    ports:
+      - "5050:80"
+    networks:
+      - pg-network
+
+networks:
+  pg-network:
+
+volumes:
+  pg-data:
