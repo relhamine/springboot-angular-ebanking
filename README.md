@@ -1,16 +1,17 @@
-# Angular + Spring Boot - Hello World Example
+# Angular + Spring Boot - E-banking
 # Run the application
 
 Step 1: Download or clone the source code from GitHub to a local machine
 
-# Backend
+# Backend (Spring boot 3)
 
 Step 2:  ``` install docker && docker-compose up (on directory docker-db)```
+
 Step 3:  ```mvn clean install```
 
 Step 4:  ```mvn spring-boot:run```
 
-# Frontend
+# Frontend (Angular 18)
 
 Step 5:  ```npm install```
 
