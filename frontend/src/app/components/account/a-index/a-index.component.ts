@@ -36,10 +36,9 @@ export class AIndexComponent implements OnInit {
     }
 
     this.operationFromGroup = this.fb.group({
-      operationType: this.fb.control('DEBIT'),
-      amount: ['0', [Validators.required, Validators.minLength(3)]],
-      description: this.fb.control(null),
-      accountDestination: this.fb.control(null)
+      operationType: this.fb.control('', [Validators.required]),
+      amount: ['', [Validators.required, Validators.minLength(1)]],
+      description: this.fb.control(null)
     })
 
   }
@@ -67,30 +66,32 @@ export class AIndexComponent implements OnInit {
     let description: string = this.operationFromGroup.value.description;
     let accountDestination: string = this.operationFromGroup.value.accountDestination;
 
-    if (operationType == 'DEBIT') {
-      this.accountService.debit(accountId, amount, description).subscribe({
-        next: (data) => {
-          alert("Success Credit");
-          this.operationFromGroup.reset();
-          this.handleSearchAccount();
-          this.errorMessage = "Success Credit";
-        },
-        error: (err) => {
-          this.errorMessage = err;
+    if (this.operationFromGroup.valid) {
+      if (operationType == 'DEBIT') {
+        this.accountService.debit(accountId, amount, description).subscribe({
+          next: (data) => {
+            alert("Success Credit");
+            //this.operationFromGroup.reset();
+            this.handleSearchAccount();
+            this.errorMessage = "Success Credit";
+          },
+          error: (err) => {
+            this.errorMessage = err;
 
-        }
-      });
-    } else if (operationType == 'CREDIT') {
-      this.accountService.credit(accountId, amount, description).subscribe({
-        next: (data) => {
-          alert("Success Debit");
-          this.operationFromGroup.reset();
-          this.handleSearchAccount();
-        },
-        error: (err) => {
-          this.errorMessage = err;
-        }
-      });
+          }
+        });
+      } else if (operationType == 'CREDIT') {
+        this.accountService.credit(accountId, amount, description).subscribe({
+          next: (data) => {
+            alert("Success Debit");
+            //this.operationFromGroup.reset();
+            this.handleSearchAccount();
+          },
+          error: (err) => {
+            this.errorMessage = err;
+          }
+        });
+      }
     }
   }
 }
