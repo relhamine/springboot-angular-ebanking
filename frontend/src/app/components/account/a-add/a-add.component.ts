@@ -50,7 +50,7 @@ export class AAddComponent implements OnInit {
   onSubmit(): void {
     this.accountService.addAccount(this.form).subscribe(
       (data) => {
-        this.router.navigate(["admin/customer"])
+        this.router.navigate(["customer"])
       }
     );
   }

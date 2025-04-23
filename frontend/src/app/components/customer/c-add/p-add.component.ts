@@ -28,7 +28,7 @@ export class PAddComponent implements OnInit {
     this.customerService.addCustomer(this.form).subscribe(
 
       (data) =>{
-        this.router.navigate(["admin/customer"])
+        this.router.navigate(["customer"])
       }
       );
   }
