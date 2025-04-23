@@ -22,7 +22,6 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 @Component
-@Profile("!test")
 public class StartupRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
