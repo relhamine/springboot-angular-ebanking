@@ -11,10 +11,18 @@ import {ServerErrorInterceptor} from "./core/config/errors/server-error.intercep
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MessagesComponent} from "./components/message/messages.component";
 import {MessageService} from "./services/message.service";
+import {AlayoutComponent} from "./components/alayout/alayout.component";
+import {DashboardComponent} from "./components/dashbord/dashbord.component";
+import {SidemenuComponent} from "./components/sidemenu/sidemenu.component";
+import {AheaderComponent} from "./components/aheader/aheader.component";
 
 
 @NgModule({
   declarations: [
+    AlayoutComponent,
+    DashboardComponent,
+    SidemenuComponent,
+    AheaderComponent,
     AppComponent,
     ErrorComponent,
     MessagesComponent
