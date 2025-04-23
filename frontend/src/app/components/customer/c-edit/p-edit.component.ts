@@ -48,7 +48,7 @@ export class PEditComponent implements OnInit {
   onSubmit(): void {
     this.customerService.updateCustomer(this.form, this.id).subscribe(
       (data: Customer) => {
-        this.router.navigate(["admin/customer"])
+        this.router.navigate(["customer"])
         // Handle success response
       },
       (error: any) => {
