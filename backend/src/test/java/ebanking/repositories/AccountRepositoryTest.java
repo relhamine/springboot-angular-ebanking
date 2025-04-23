@@ -22,8 +22,9 @@ class AccountRepositoryTest {
     @Autowired
     CustomerRepository customerRepository;
 
-    @BeforeAll
-    void setUp() {
+    @Test
+    void shouldGetAllAccount() {
+
         //Save customer
         Customer customer = new Customer();
         customer.setId(1l);
@@ -40,10 +41,7 @@ class AccountRepositoryTest {
         account.setCreatedAt(new Date());
         account.setCustomer(customer);
         accountRepository.save(account);
-    }
 
-    @Test
-    void shouldGetAllAccount() {
         //Act
         List<Account> accounts = accountRepository.findAll();
 

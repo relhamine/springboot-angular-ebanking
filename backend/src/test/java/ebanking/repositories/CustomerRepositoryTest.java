@@ -19,18 +19,15 @@ class CustomerRepositoryTest {
     @Autowired
     CustomerRepository customerRepository;
 
-    @BeforeAll
-    void setUp() {
+    @Test
+    void shouldGetAllCustomer() {
         //Save customer
         Customer customer = new Customer();
         customer.setId(1l);
         customer.setName("dupont");
         customer.setEmail("name@gmaill.com");
         customerRepository.save(customer);
-    }
 
-    @Test
-    void shouldGetAllCustomer() {
         //Act
         List<Customer> customers = customerRepository.searchCustomer("dupont");
 
