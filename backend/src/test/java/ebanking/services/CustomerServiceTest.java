@@ -42,7 +42,7 @@ class CustomerServiceTest {
         when(customerRepository.findAll()).thenReturn(List.of(customer1, customer2));
 
         List<Customer> customers = customerRepository.findAll();
-        assertThat(customers).hasSize(2);
+        assertThat(customers).hasSize(2).containsExactly(customer1, customer2);
     }
 
     @Test
