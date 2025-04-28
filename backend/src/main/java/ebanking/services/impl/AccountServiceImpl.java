@@ -18,6 +18,8 @@ import ebanking.repositories.CustomerRepository;
 import ebanking.services.AccountService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -33,6 +35,8 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @Slf4j
 public class AccountServiceImpl implements AccountService {
+    private static final Logger logger =  LogManager.getLogger( AccountServiceImpl.class );
+
     private CustomerRepository customerRepository;
     private AccountRepository accountRepository;
     private AccountOperationRepository accountOperationRepository;
@@ -74,8 +78,7 @@ public class AccountServiceImpl implements AccountService {
                     .orElseThrow(() -> new AccountNotFoundException("Account not found"));
             return dtoMapper.fromAccount(account);
         } catch (AccountNotFoundException ex) {
-            // Handle the exception and return a response to the client
-            System.out.println("Account is not found");
+            logger.debug("Account is not found");
             return new AccountDTO(); // or any other appropriate response
         }
     }

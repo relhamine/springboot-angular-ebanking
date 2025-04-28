@@ -10,9 +10,10 @@ import ebanking.repositories.RoleRepository;
 import ebanking.repositories.UserRepository;
 import ebanking.services.AccountService;
 import ebanking.services.CustomerService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -23,9 +24,11 @@ import java.util.stream.Stream;
 
 @Component
 public class StartupRunner implements CommandLineRunner {
+    private static final Logger logger =  LogManager.getLogger( StartupRunner.class );
+
     @Override
     public void run(String... args) throws Exception {
-        System.out.println("CommandLineRunner logic executing during startup...");
+        logger.debug("CommandLineRunner logic executing during startup...");
     }
 
     @Bean
