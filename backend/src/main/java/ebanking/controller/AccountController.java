@@ -25,7 +25,7 @@ public class AccountController {
 
     @GetMapping("/accounts/{accountId}")
     @Operation(description = "Get Account by ID")
-    public AccountDTO getAccount(@Valid @PathVariable String accountId) throws AccountNotFoundException {
+    public AccountDTO getAccount(@Valid @PathVariable String accountId) {
         return accountService.getAccount(accountId);
     }
 
@@ -53,7 +53,7 @@ public class AccountController {
         return debitDTO;
     }
     @GetMapping("/customers/accounts/{id}")
-    public List<AccountDTO> getAccountsByCustomerId(@PathVariable(name = "id") Long id) throws AccountNotFoundException {
+    public List<AccountDTO> getAccountsByCustomerId(@PathVariable(name = "id") Long id){
         return accountService.getAccountsByCustomerId(id);
     }
 
@@ -65,7 +65,7 @@ public class AccountController {
     }
 
     @PostMapping("/customers/accounts/add")
-    public void add(@RequestBody AccountDTO accountDTO) throws AccountNotFoundException, BalanceNotSufficientException {
+    public void add(@RequestBody AccountDTO accountDTO) {
         this.accountService.saveAccount(accountDTO);
     }
 }

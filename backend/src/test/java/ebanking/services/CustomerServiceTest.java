@@ -3,7 +3,6 @@ package ebanking.services;
 import ebanking.entities.Customer;
 import ebanking.repositories.CustomerRepository;
 import ebanking.services.impl.CustomerServiceImpl;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -45,8 +44,9 @@ class CustomerServiceTest {
         assertThat(customers).hasSize(2).containsExactly(customer1, customer2);
     }
 
+
     @Test
-    void saveCustomer() {
+    void shouldSaveCustomer() {
     }
 
     @Test
@@ -61,7 +61,5 @@ class CustomerServiceTest {
     void deleteCustomer() {
     }
 
-    @Test
-    void searchCustomers() {
-    }
+
 }

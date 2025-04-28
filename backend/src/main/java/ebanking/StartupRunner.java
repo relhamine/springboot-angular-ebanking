@@ -73,13 +73,14 @@ public class StartupRunner implements CommandLineRunner {
             roles.add(role);
 
             User user = new User();
-            user.setEmail("relhamine@gmail.com");
-            user.setUsername("relhamine@gmail.com");
+            String userName = "relhamine@gmail.com";
+            String password = "relhamine@gmail.com";
+            user.setEmail(userName);
+            user.setUsername(userName);
             user.setRoles(roles);
 
-            String password = "relhamine@gmail.com";
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-            String encodedPassword = encoder.encode(password);
+            String encodedPassword = encoder.encode(userName);
 
             user.setPassword(encodedPassword);
 
