@@ -35,15 +35,13 @@ public class StartupRunner implements CommandLineRunner {
     CommandLineRunner commandLineRunner(AccountService accountService, CustomerService customerService) {
         return args -> {
             Stream.of("Rachid", "Sandrine", "Camille").forEach(name -> {
-                CustomerDTO customer = new CustomerDTO();
-                customer.setName(name);
-                customer.setEmail(name + "@gmail.com");
-                customerService.saveCustomer(customer);
+                CustomerDTO customerResponse = new CustomerDTO(null, name, name + "@gmail.com");
+                customerService.saveCustomer(customerResponse);
             });
             customerService.listCustomers().forEach(customer -> {
                 try {
-                    accountService.saveAccount(Math.random() * 9000, 1000000, 9000, customer.getId());
-                    accountService.saveAccount(Math.random() * 1200, 1000000, 5.5, customer.getId());
+                    accountService.saveAccount(Math.random() * 9000, 1000000, 9000, customer.id());
+                    accountService.saveAccount(Math.random() * 1200, 1000000, 5.5, customer.id());
 
                 } catch (CustomerNotFoundException e) {
                     e.printStackTrace();
@@ -52,7 +50,7 @@ public class StartupRunner implements CommandLineRunner {
             List<AccountDTO> accounts = accountService.getAccounts();
             for (AccountDTO bankAccount : accounts) {
                 for (int i = 0; i < 10; i++) {
-                    String accountId = accountId = bankAccount.getId();
+                    String accountId = accountId = bankAccount.id();
                     accountService.credit(accountId, 10000 + Math.random() * 120000, "Credit");
                     accountService.debit(accountId, 1000 + Math.random() * 9000, "Debit");
                 }

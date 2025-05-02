@@ -1,16 +1,17 @@
 package ebanking.dtos;
 
-import lombok.Data;
-
 import java.util.Date;
 
-@Data
-public class AccountDTO {
-    private String type;
-    private String id;
-    private double balance;
-    private double plafond;
-    private double overDraft;
-    private Date createdAt;
-    private CustomerDTO customerDTO;
+public record AccountDTO(String type,
+                         String id,
+                         double balance,
+                         double plafond,
+                         double overDraft,
+                         Date createdAt,
+                         CustomerDTO customerDTO) {
+
+    public AccountDTO() {
+        this(null,null,0,0,0,null, null);
+    }
+
 }

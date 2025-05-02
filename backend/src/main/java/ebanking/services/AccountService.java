@@ -3,10 +3,9 @@ package ebanking.services;
 import ebanking.dtos.AccountDTO;
 import ebanking.dtos.AccountHistoryDTO;
 import ebanking.dtos.AccountOperationDTO;
-import ebanking.dtos.CustomerDTO;
+import ebanking.exceptions.AccountNotFoundException;
 import ebanking.exceptions.BalanceExceedException;
 import ebanking.exceptions.BalanceNotSufficientException;
-import ebanking.exceptions.AccountNotFoundException;
 import ebanking.exceptions.CustomerNotFoundException;
 
 import java.util.List;

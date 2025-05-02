@@ -1,25 +1,19 @@
 package ebanking.services;
 
-import ebanking.dtos.AccountDTO;
-import ebanking.dtos.AccountHistoryDTO;
-import ebanking.dtos.AccountOperationDTO;
-import ebanking.dtos.CustomerDTO;
-import ebanking.exceptions.AccountNotFoundException;
-import ebanking.exceptions.BalanceExceedException;
-import ebanking.exceptions.BalanceNotSufficientException;
+import ebanking.dtos.*;
 import ebanking.exceptions.CustomerNotFoundException;
 
 import java.util.List;
 
 public interface CustomerService {
-    CustomerDTO saveCustomer(CustomerDTO customerDTO);
+    CustomerDTO saveCustomer(CustomerDTO customerResponse);
 
     List<CustomerDTO> listCustomers();
 
     CustomerDTO getCustomer(Long customerId) throws CustomerNotFoundException;
 
 
-    CustomerDTO updateCustomer(CustomerDTO customerDTO);
+    CustomerDTO updateCustomer(CustomerDTO customerResponse);
 
     void deleteCustomer(Long customerId);
 

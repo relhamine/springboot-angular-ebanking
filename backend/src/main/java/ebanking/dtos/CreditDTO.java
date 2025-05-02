@@ -2,9 +2,8 @@ package ebanking.dtos;
 
 import lombok.Data;
 
-@Data
-public class CreditDTO {
-    private String accountId;
-    private double amount;
-    private String description;
+public record CreditDTO(
+        String accountId,
+        double amount,
+        String description) {
 }

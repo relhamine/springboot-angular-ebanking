@@ -1,10 +1,6 @@
 package ebanking.dtos;
 
-import lombok.Data;
-
-@Data
-public class DebitDTO {
-    private String accountId;
-    private double amount;
-    private String description;
+public record DebitDTO(String accountId,
+                       double amount,
+                       String description) {
 }

@@ -3,7 +3,8 @@ package ebanking.services.impl;
 import ebanking.dtos.CustomerDTO;
 import ebanking.entities.Customer;
 import ebanking.exceptions.CustomerNotFoundException;
-import ebanking.mappers.MapperImpl;
+import ebanking.mappers.CustomerListMapper;
+import ebanking.mappers.CustomerMapper;
 import ebanking.repositories.CustomerRepository;
 import ebanking.services.CustomerService;
 import lombok.AllArgsConstructor;
@@ -12,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -20,30 +20,22 @@ import java.util.stream.Collectors;
 @Slf4j
 public class CustomerServiceImpl implements CustomerService {
     private CustomerRepository customerRepository;
-    private MapperImpl dtoMapper;
+    private CustomerListMapper customerListMapper;
+    private CustomerMapper customerMapper;
+
 
     @Override
-    public CustomerDTO saveCustomer(CustomerDTO customerDTO) {
+    public CustomerDTO saveCustomer(CustomerDTO customerResponse) {
         log.info("Saving new Customer");
-        Customer customer = dtoMapper.fromCustomerDTO(customerDTO);
+        Customer customer = customerMapper.toModel(customerResponse);
         Customer savedCustomer = customerRepository.save(customer);
-        return dtoMapper.fromCustomer(savedCustomer);
+        return customerMapper.toDTO(savedCustomer);
     }
 
     @Override
     public List<CustomerDTO> listCustomers() {
         List<Customer> customers = customerRepository.findAll();
-        List<CustomerDTO> customerDTOS = customers.stream()
-                .map(customer -> dtoMapper.fromCustomer(customer))
-                .collect(Collectors.toList());
-        /*
-        List<CustomerDTO> customerDTOS=new ArrayList<>();
-        for (Customer customer:customers){
-            CustomerDTO customerDTO=dtoMapper.fromCustomer(customer);
-            customerDTOS.add(customerDTO);
-        }
-        *
-         */
+        List<CustomerDTO> customerDTOS = customerListMapper.toDTOList(customers);
         return customerDTOS;
     }
 
@@ -51,16 +43,16 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerDTO getCustomer(Long customerId) throws CustomerNotFoundException {
         Customer customer = customerRepository.findById(customerId)
                 .orElseThrow(() -> new CustomerNotFoundException("Customer Not found"));
-        return dtoMapper.fromCustomer(customer);
+        return customerMapper.toDTO(customer);
     }
 
 
     @Override
-    public CustomerDTO updateCustomer(CustomerDTO customerDTO) {
+    public CustomerDTO updateCustomer(CustomerDTO customerResponse) {
         log.info("Saving new Customer");
-        Customer customer = dtoMapper.fromCustomerDTO(customerDTO);
+        Customer customer = customerMapper.toModel(customerResponse);
         Customer savedCustomer = customerRepository.save(customer);
-        return dtoMapper.fromCustomer(savedCustomer);
+        return customerMapper.toDTO(savedCustomer);
     }
 
     @Override
@@ -71,7 +63,6 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public List<CustomerDTO> searchCustomers(String keyword) {
         List<Customer> customers = customerRepository.searchCustomer(keyword);
-        List<CustomerDTO> customerDTOS = customers.stream().map(cust -> dtoMapper.fromCustomer(cust)).collect(Collectors.toList());
-        return customerDTOS;
+        return customerListMapper.toDTOList(customers);
     }
 }

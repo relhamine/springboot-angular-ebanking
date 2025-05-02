@@ -2,7 +2,6 @@ package ebanking.services;
 
 import ebanking.entities.Account;
 import ebanking.entities.Customer;
-import ebanking.mappers.MapperImpl;
 import ebanking.repositories.AccountRepository;
 import ebanking.services.impl.AccountServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -19,9 +18,6 @@ class AccountServiceTest {
     @Mock
     private AccountRepository accountRepository;
 
-    @Autowired
-    private MapperImpl mapper;
-
     @InjectMocks
     private AccountServiceImpl accountService;
 
@@ -32,7 +28,7 @@ class AccountServiceTest {
     @Test
     void shouldSaveAccount() {
 
-        //Save customer
+        //Save customerDTO
         Customer customer = new Customer();
         customer.setId(1l);
         customer.setName("dupont");

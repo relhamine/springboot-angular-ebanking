@@ -1,16 +1,12 @@
 package ebanking.dtos;
 
 import ebanking.enums.OperationType;
-import lombok.Data;
 
 import java.util.Date;
 
-@Data
-public class AccountOperationDTO {
-    private Long id;
-    private Date operationDate;
-    private double amount;
-    private OperationType type;
-    private String description;
+public record AccountOperationDTO(Long id,
+                                  Date operationDate,
+                                  double amount,
+                                  OperationType type,
+                                  String description) {
 }
-
